@@ -1,10 +1,10 @@
 function GetElapsedTime {
     [CmdletBinding()]
     param (
-        [Parameter()]
+        [Parameter(Mandatory)]
         [DateTime]$StartDate,
 
-        [Parameter()]
+        [Parameter(Mandatory)]
         [DateTime]$EndDate,
 
         [Parameter(Mandatory)]
@@ -16,19 +16,14 @@ function GetElapsedTime {
 
     $Subtractor = New-TimeSpan
 
-    switch ($PSBoundParameters.Keys) {
-        "StartDate" {
-            $StartOfDayDifference = $StartOfDay.TimeOfDay - $StartDate.TimeOfDay
-            if ($StartOfDayDifference -gt 0) {
-                $Subtractor += $StartOfDayDifference
-            }
-        }
-        "EndDate" {
-            $EndOfDayDifference = $EndDate.TimeOfDay - $EndOfDay.TimeOfDay
-            if ($EndOfDayDifference -gt 0) {
-                $Subtractor += $EndOfDayDifference
-            }
-        }
+    $StartOfDayDifference = $StartOfDay.TimeOfDay - $StartDate.TimeOfDay
+    if ($StartOfDayDifference -gt 0) {
+        $Subtractor += $StartOfDayDifference
+    }
+
+    $EndOfDayDifference = $EndDate.TimeOfDay - $EndOfDay.TimeOfDay
+    if ($EndOfDayDifference -gt 0) {
+        $Subtractor += $EndOfDayDifference
     }
 
     (New-TimeSpan -Start $StartDate -End $EndDate) - $Subtractor
