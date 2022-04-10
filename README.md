@@ -4,9 +4,9 @@ A PowerShell module with functions to help working with and calculating business
 
 ## Functions
 
-- Get-ElapsedBusinessTime
-- Get-WorkingDays
-- Test-WorkingDay
+- [Get-ElapsedBusinessTime](docs/Get-ElapsedBusinessTime.md)
+- [Get-WorkingDays](docs/Get-WorkingDays.md)
+- [Test-WorkingDay](docs/Test-WorkingDay.md)
 
 ## Requirements
 
@@ -16,6 +16,8 @@ A PowerShell module with functions to help working with and calculating business
 
 ## To-do
 
+- Comment based help
+- README documentation
 - Use some public API for public holidays
 - Allow configurable 'lunch hour' and so it respects the designated time period, too, e.g.
   - if start date is 8am and end date is 5pm, and 'lunch hour' time period is 12pm - 1pm, then working hours is 8.

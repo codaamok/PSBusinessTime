@@ -24,7 +24,7 @@ GUID = 'e6e4b5fb-2215-45fd-9218-10141bb0943b'
 Author = 'Adam Cook (@codaamok)'
 
 # Company or vendor of this module
-CompanyName = 'Unknown'
+# CompanyName = 'Unknown'
 
 # Copyright statement for this module
 Copyright = '(c) Adam Cook (@codaamok). All rights reserved.'
