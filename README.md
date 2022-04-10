@@ -1,5 +1,18 @@
 # PSBusinessTime
+
 A PowerShell module with functions to help working with and calculating business hours / date times.
+
+## Functions
+
+- Get-ElapsedBusinessTime
+- Get-WorkingDays
+- Test-WorkingDay
+
+## Requirements
+
+## Getting started
+
+## Examples
 
 ## To-do
 
