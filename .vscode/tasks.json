@@ -41,7 +41,7 @@
         {
             "label": "Tests",
             "type": "process",
-            "command": "pwsh",
+            "command": "powershell",
             "args": ["-noprofile", "-file", "./tests/invoke.tests.ps1"],
             "group": {
                 "kind": "test",
