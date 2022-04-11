@@ -18,26 +18,26 @@ Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-
 
 Install and import:
 
-```ps
+```powershell
 Install-Module PSBusinessTime -Scope CurrentUser
 Import-Module PSBusinessTime
 ```
 
 See the below examples and use `Get-Help` to learn more about the functions with examples. You can discover all functions in the module by running:
 
-```ps
+```powershell
 Get-Command -Module PSBusinessTime
 ```
 
 ## Examples
 
-```ps
+```powershell
 Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
 ```
 
 The function will return a timespan object of 162 hours:
 
-```ps
+```powershell
 Days              : 7
 Hours             : 3
 Minutes           : 0
@@ -55,7 +55,7 @@ TotalMilliseconds : 615600000
 
 ___
 
-```ps
+```powershell
 Test-WorkingDay -Date (Get-Date '2022-04-11 09:00:00')
 ```
 
@@ -63,13 +63,13 @@ The function will return `true` because the datetime is within the default param
 
 ___
 
-```ps
+```powershell
 Get-WorkingDates -StartDate (Get-Date '2022-04-04') -EndDate (Get-Date '2022-04-17') -NonWorkingDaysOfWeek 'Saturday','Sunday','Monday'
 ```
 
 The function will return an array of 8 datetime objects for '2022-04-05' through to '2022-04-08', and '2022-04-12' through to '2022-04-15':
 
-```ps
+```powershell
 05 April 2022 00:00:00
 06 April 2022 00:00:00
 07 April 2022 00:00:00
