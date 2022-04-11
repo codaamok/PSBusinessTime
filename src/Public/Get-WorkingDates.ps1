@@ -38,5 +38,4 @@ function Get-WorkingDates {
     } while ($Days)
 
     $WorkingDays
-    
 }
