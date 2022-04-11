@@ -21,6 +21,7 @@ Test-WorkingDay [-Date] <DateTime> [[-StartHour] <DateTime>] [[-FinishHour] <Dat
 Determine whether a given datetime is a working day.
 What constitutes a "working day" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
 In other words, the default parameters dictate normal working days are Monday through Friday, and normal working hours are 08:00 through 17:00.
+You can also further specify particular dates to be regarded as non-working dates via the -NonWorkingDates parameter.
 If the datetime of -Date falls outside of these parameters, you'll receive a boolean result.
 
 ## EXAMPLES
@@ -48,7 +49,6 @@ Test-WorkingDay -Date (Get-Date '2022-04-11 22:00:00') -StartHour (Get-Date '08:
 
 The function will return true as the datetime is within the defined parameters.
 2022-04-11 is a Monday, and 22:00 is between 08:00 and 23:00.
-
 Note: a datetime object is passed for both -StartHour and -FinishHour, however only the time is used for calculation.
 The date is ignored.
 
