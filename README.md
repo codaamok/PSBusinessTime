@@ -12,7 +12,22 @@ Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-
 
 ## Requirements
 
+- PowerShell 5.1 or newer
+
 ## Getting started
+
+Install and import:
+
+```ps
+Install-Module PSBusinessTime -Scope CurrentUser
+Import-Module PSBusinessTime
+```
+
+See the below examples and use `Get-Help` to learn more about the functions with examples. You can discover all functions in the module by running:
+
+```ps
+Get-Command -Module PSBusinessTime
+```
 
 ## Examples
 
