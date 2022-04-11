@@ -84,7 +84,6 @@ These are considered working dates within the defined parameters. Saturdays, Sun
 
 ## To-do
 
-- README documentation
 - Use some public API for public holidays
 - Allow configurable 'lunch hour' and so it respects the designated time period, too, e.g.
   - if start date is 8am and end date is 5pm, and 'lunch hour' time period is 12pm - 1pm, then working hours is 8.
