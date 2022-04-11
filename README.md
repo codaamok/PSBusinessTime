@@ -16,9 +16,13 @@ Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-
 
 ## Examples
 
-```powershell
+```ps
 Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
+```
 
+The function will return a timespan object of 162 hours:
+
+```ps
 Days              : 7
 Hours             : 3
 Minutes           : 0
@@ -32,23 +36,25 @@ TotalSeconds      : 615600
 TotalMilliseconds : 615600000
 ```
 
-The function will return a timespan object of 162 hours. 2022-04-01 through 2022-04-30 is an entire calendar month, and only 162 hours is considered "working hours" within the defined parameters. '2022-04-15' and '2022-04-18' are considered non-working dates.
+2022-04-01 through 2022-04-30 is an entire calendar month, and only 162 hours is considered "working hours" within the defined parameters. '2022-04-15' and '2022-04-18' are considered non-working dates.
 
 ___
 
-```powershell
+```ps
 Test-WorkingDay -Date (Get-Date '2022-04-11 09:00:00')
-
-True
 ```
 
-The function will return true as the datetime is within the default parameters. 2022-04-11 is a Monday, and 09:00 is between 08:00 and 17:00.
+The function will return `true` because the datetime is within the default parameters. 2022-04-11 is a Monday, and 09:00 is between 08:00 and 17:00.
 
 ___
 
-```powershell
+```ps
 Get-WorkingDates -StartDate (Get-Date '2022-04-04') -EndDate (Get-Date '2022-04-17') -NonWorkingDaysOfWeek 'Saturday','Sunday','Monday'
+```
 
+The function will return an array of 8 datetime objects for '2022-04-05' through to '2022-04-08', and '2022-04-12' through to '2022-04-15':
+
+```ps
 05 April 2022 00:00:00
 06 April 2022 00:00:00
 07 April 2022 00:00:00
@@ -59,7 +65,7 @@ Get-WorkingDates -StartDate (Get-Date '2022-04-04') -EndDate (Get-Date '2022-04-
 15 April 2022 00:00:00
 ```
 
-The function will return an array of 8 datetime objects for '2022-04-05' through to '2022-04-08', and '2022-04-12' through to '2022-04-15'. These are considered working dates within the defined parameters. Saturdays, Sundays, and Mondays, are considered non-working days, therefore every other date inbetween the range is considered a working date.
+These are considered working dates within the defined parameters. Saturdays, Sundays, and Mondays, are considered non-working days, therefore every other date inbetween the range is considered a working date.
 
 ## To-do
 

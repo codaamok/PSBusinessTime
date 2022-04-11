@@ -25,24 +25,24 @@ function Test-WorkingDay {
     .EXAMPLE
         Test-WorkingDay -Date (Get-Date '2022-04-11 09:00:00')
         
-        The function will return true as the datetime is within the default parameters. 2022-04-11 is a Monday, and 09:00 is between 08:00 and 17:00.
+        The function will return true because the datetime is within the default parameters. 2022-04-11 is a Monday, and 09:00 is between 08:00 and 17:00.
     .EXAMPLE
         Test-WorkingDay -Date (Get-Date '2022-04-10 11:00:00')
 
-        The function will return false as the datetime is outside the default parameters. 2022-04-10 is a Sunday, and therefore is not a working day, regardless of the hour/minute.
+        The function will return false because the datetime is outside the default parameters. 2022-04-10 is a Sunday, and therefore is not a working day, regardless of the hour/minute.
     .EXAMPLE
         Test-WorkingDay -Date (Get-Date '2022-04-11 22:00:00') -StartHour (Get-Date '08:00:00') -FinishHour Get-Date '23:00:00'
 
-        The function will return true as the datetime is within the defined parameters. 2022-04-11 is a Monday, and 22:00 is between 08:00 and 23:00.
+        The function will return true because the datetime is within the defined parameters. 2022-04-11 is a Monday, and 22:00 is between 08:00 and 23:00.
         Note: a datetime object is passed for both -StartHour and -FinishHour, however only the time is used for calculation. The date is ignored.
     .EXAMPLE
         Test-WorkingDay -Date (Get-Date '2022-04-11 09:00:00') -NonWorkingDaysOfWeek 'Saturday','Sunday','Monday'
 
-        The function will return false as the datetime is outside the defined parameters. 2022-04-11 is a Monday, and is considered a non working day of the week.
+        The function will return false because the datetime is outside the defined parameters. 2022-04-11 is a Monday, and is considered a non working day of the week.
     .EXAMPLE
         Test-WorkingDay -Date (Get-Date '2022-04-11 09:00:00') -NonWorkingDates (Get-Date '2022-04-11')
 
-        The function will return false as the datetime is outside the defined parameters. 2022-04-11 is a Monday, and is considered a non working date.
+        The function will return false because the datetime is outside the defined parameters. 2022-04-11 is a Monday, and is considered a non working date.
     .INPUTS
         This function does not accept pipeline input.
     .OUTPUTS
