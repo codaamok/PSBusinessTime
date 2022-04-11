@@ -72,7 +72,7 @@ Describe "Get-WorkingDates" {
     It "should be 8 working days across 14 consecutive days, where Sat+Sun+Mon are non-working days" {
         $StartDate = Get-Date '2022-04-04 08:00:00'
         $EndDate   = Get-Date '2022-04-17 17:00:00'
-        Get-WorkingDates -StartDate $StartDate -EndDate $EndDate -NonWorkingDaysOfWeek 0,1,6 | Should -Be @(
+        Get-WorkingDates -StartDate $StartDate -EndDate $EndDate -NonWorkingDaysOfWeek 'Saturday','Sunday','Monday' | Should -Be @(
             (Get-Date '2022-04-05 00:00:00').Date
             (Get-Date '2022-04-06 00:00:00').Date
             (Get-Date '2022-04-07 00:00:00').Date

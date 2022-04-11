@@ -14,7 +14,7 @@ schema: 2.0.0
 
 ```
 Get-ElapsedBusinessTime [-StartDate] <DateTime> [-EndDate] <DateTime> [[-StartOfDay] <DateTime>]
- [[-EndOfDay] <DateTime>] [[-NonWorkingDaysOfWeek] <Int32[]>] [[-NonWorkingDates] <DateTime[]>]
+ [[-EndOfDay] <DateTime>] [[-NonWorkingDaysOfWeek] <String[]>] [[-NonWorkingDates] <DateTime[]>]
  [<CommonParameters>]
 ```
 
@@ -81,9 +81,10 @@ Accept wildcard characters: False
 {{ Fill NonWorkingDaysOfWeek Description }}
 
 ```yaml
-Type: Int32[]
+Type: String[]
 Parameter Sets: (All)
 Aliases:
+Accepted values: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 
 Required: False
 Position: 4

@@ -11,10 +11,11 @@ function Get-WorkingDates {
         [DateTime]$EndDate,
 
         [Parameter()]
-        [int[]]$NonWorkingDaysOfWeek = @(0,6),
+        [ValidateSet('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')]
+        [String[]]$NonWorkingDaysOfWeek = @('Saturday','Sunday'),
 
         [Parameter()]
-        [DateTime[]]$NonWorkingDates = @()
+        [DateTime[]]$NonWorkingDates
     )
  
     if ($StartDate.TimeOfDay -eq $EndDate.TimeOfDay) { 

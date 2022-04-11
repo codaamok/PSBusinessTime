@@ -130,7 +130,8 @@ Describe "Get-ElapsedBusinessTime" {
         It "should be 0 hours, across 365 consecutive days, where 0 are working days and 365 are not" {
             $StartDate = Get-Date '2022-01-01 00:00:00'
             $EndDate   = Get-Date '2022-12-31 23:59:59'
-            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate -NonWorkingDaysOfWeek (0..7)).TotalHours | Should -Be 0
+            $NonWorkingDaysOfWeek = 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate -NonWorkingDaysOfWeek $NonWorkingDaysOfWeek).TotalHours | Should -Be 0
         }
     }
 }

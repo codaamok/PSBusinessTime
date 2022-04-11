@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-WorkingDates [-StartDate] <DateTime> [-EndDate] <DateTime> [[-NonWorkingDaysOfWeek] <Int32[]>]
+Get-WorkingDates [-StartDate] <DateTime> [-EndDate] <DateTime> [[-NonWorkingDaysOfWeek] <String[]>]
  [[-NonWorkingDates] <DateTime[]>] [<CommonParameters>]
 ```
 
@@ -65,9 +65,10 @@ Accept wildcard characters: False
 {{ Fill NonWorkingDaysOfWeek Description }}
 
 ```yaml
-Type: Int32[]
+Type: String[]
 Parameter Sets: (All)
 Aliases:
+Accepted values: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 
 Required: False
 Position: 2

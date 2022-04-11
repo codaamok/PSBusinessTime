@@ -17,10 +17,11 @@ function Get-ElapsedBusinessTime {
         [DateTime]$EndOfDay = '17:00:00',
 
         [Parameter()]
-        [int[]]$NonWorkingDaysOfWeek = @(0,6),
+        [ValidateSet('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday')]
+        [String[]]$NonWorkingDaysOfWeek = @('Saturday','Sunday'),
 
         [Parameter()]
-        [DateTime[]]$NonWorkingDates = @()
+        [DateTime[]]$NonWorkingDates
     )
 
     $CommonParams = @{
@@ -48,7 +49,7 @@ function Get-ElapsedBusinessTime {
         $NumberOfWorkingDays = $WorkingDays.Count
         $ElapsedTime = New-TimeSpan
         
-        if (Test-WorkingDay -StartDate $StartDate -StartHour $StartOfDay -FinishHour $EndOfDay @CommonParams) {
+        if (Test-WorkingDay -Date $StartDate -StartHour $StartOfDay -FinishHour $EndOfDay @CommonParams) {
             $FirstDayEndDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $StartDate.Year,
                                                                       $StartDate.Month,
                                                                       $StartDate.Day,
@@ -66,7 +67,7 @@ function Get-ElapsedBusinessTime {
             $NumberOfWorkingDays--
         }
 
-        if (Test-WorkingDay -StartDate $EndDate -StartHour $StartOfDay -FinishHour $EndOfDay @CommonParams) {
+        if (Test-WorkingDay -Date $EndDate -StartHour $StartOfDay -FinishHour $EndOfDay @CommonParams) {
             $LastDayStartDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $EndDate.Year,
                                                                        $EndDate.Month,
                                                                        $EndDate.Day,

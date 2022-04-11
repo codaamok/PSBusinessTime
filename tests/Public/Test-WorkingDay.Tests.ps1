@@ -13,26 +13,26 @@ BeforeAll {
 Describe "Test-WorkingDay" {
     It "Should be a working day: <_.Description>" -TestCases @(
         @{
-            StartDate   = Get-Date '2022-04-07 10:00:00'
+            Date   = Get-Date '2022-04-07 10:00:00'
             StartHour   = Get-Date '08:00:00'
             FinishHour  = Get-Date '17:00:00'
             Description = 'traditional work day and time'
         }
         @{
-            StartDate   = Get-Date '2022-04-07 01:00:00'
+            Date   = Get-Date '2022-04-07 01:00:00'
             StartHour   = Get-Date '01:00:00'
             FinishHour  = Get-Date '17:00:00'
             Description = 'alternative starting work hour'
         }
         @{
-            StartDate   = Get-Date '2022-04-07 22:00:00'
+            Date   = Get-Date '2022-04-07 22:00:00'
             StartHour   = Get-Date '08:00:00'
             FinishHour  = Get-Date '23:00:00'
             Description = 'alternative finishing work hour'
         }
     ) {
         $Params = @{
-            StartDate  = $StartDate
+            Date       = $Date
             StartHour  = $StartHour
             FinishHour = $FinishHour
         }
@@ -41,26 +41,26 @@ Describe "Test-WorkingDay" {
 
     It "Should not be a working day: <_.Description>" -TestCases @(
         @{
-            StartDate            = Get-Date '2022-04-10 10:00:00'
+            Date                 = Get-Date '2022-04-10 10:00:00'
             NonWorkingDates      = $null
-            NonWorkingDaysOfWeek = 0,6
+            NonWorkingDaysOfWeek = 'Saturday','Sunday'
             Description          = 'weekend'
         }
         @{
-            StartDate            = Get-Date '2022-04-07 10:00:00'
+            Date                 = Get-Date '2022-04-07 10:00:00'
             NonWorkingDates      = Get-Date '2022-04-07'
-            NonWorkingDaysOfWeek = 0,6
+            NonWorkingDaysOfWeek = 'Saturday','Sunday'
             Description          = 'non-working date eg public holiday'
         }
         @{
-            StartDate            = Get-Date '2022-04-07 10:00:00'
+            Date                 = Get-Date '2022-04-07 10:00:00'
             NonWorkingDates      = $null
-            NonWorkingDaysOfWeek = 4
+            NonWorkingDaysOfWeek = 'Thursday'
             Description          = 'alternative non-working day of the week'
         }
     ) {
         $Params = @{
-            StartDate            = $StartDate
+            Date                 = $Date
             NonWorkingDates      = $NonWorkingDates
             NonWorkingDaysOfWeek = $NonWorkingDaysOfWeek
         }
