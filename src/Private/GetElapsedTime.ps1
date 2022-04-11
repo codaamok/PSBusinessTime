@@ -8,22 +8,22 @@ function GetElapsedTime {
         [DateTime]$EndDate,
 
         [Parameter(Mandatory)]
-        [DateTime]$StartOfDay,
+        [DateTime]$StartHour,
 
         [Parameter(Mandatory)]
-        [DateTime]$EndOfDay
+        [DateTime]$FinishHour
     )
 
     $Subtractor = New-TimeSpan
 
-    $StartOfDayDifference = $StartOfDay.TimeOfDay - $StartDate.TimeOfDay
-    if ($StartOfDayDifference -gt 0) {
-        $Subtractor += $StartOfDayDifference
+    $StartHourDifference = $StartHour.TimeOfDay - $StartDate.TimeOfDay
+    if ($StartHourDifference -gt 0) {
+        $Subtractor += $StartHourDifference
     }
 
-    $EndOfDayDifference = $EndDate.TimeOfDay - $EndOfDay.TimeOfDay
-    if ($EndOfDayDifference -gt 0) {
-        $Subtractor += $EndOfDayDifference
+    $FinishHourDifference = $EndDate.TimeOfDay - $FinishHour.TimeOfDay
+    if ($FinishHourDifference -gt 0) {
+        $Subtractor += $FinishHourDifference
     }
 
     (New-TimeSpan -Start $StartDate -End $EndDate) - $Subtractor

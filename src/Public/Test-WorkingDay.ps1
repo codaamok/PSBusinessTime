@@ -6,7 +6,7 @@ function Test-WorkingDay {
         Determine whether a given datetime is a working day.
         What constitutes a "working day" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
         In other words, the default parameters dictate normal working days are Monday through Friday, and normal working hours are 08:00 through 17:00.
-        You can also further specify particular dates to be regarded as non-working dates via the -NonWorkingDates parameter.
+        You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
         If the datetime of -Date falls outside of these parameters, you'll receive a boolean result.
     .PARAMETER Date
         The datetime to determine whether it is a working day or not.

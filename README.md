@@ -18,7 +18,6 @@ Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-
 
 ## To-do
 
-- Comment based help
 - README documentation
 - Use some public API for public holidays
 - Allow configurable 'lunch hour' and so it respects the designated time period, too, e.g.
