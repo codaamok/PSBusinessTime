@@ -2,6 +2,8 @@
 
 A PowerShell module with functions to help working with and calculating business hours / date times.
 
+Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-hours-using-powershell/.
+
 ## Functions
 
 - [Get-ElapsedBusinessTime](docs/Get-ElapsedBusinessTime.md)
