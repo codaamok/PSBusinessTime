@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-WorkingDays
+# Get-WorkingDates
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-WorkingDays [-StartDate] <DateTime> [-EndDate] <DateTime> [[-NonWorkingDaysOfWeek] <Int32[]>]
+Get-WorkingDates [-StartDate] <DateTime> [-EndDate] <DateTime> [[-NonWorkingDaysOfWeek] <Int32[]>]
  [[-NonWorkingDates] <DateTime[]>] [<CommonParameters>]
 ```
 

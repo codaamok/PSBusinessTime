@@ -5,7 +5,7 @@ A PowerShell module with functions to help working with and calculating business
 ## Functions
 
 - [Get-ElapsedBusinessTime](docs/Get-ElapsedBusinessTime.md)
-- [Get-WorkingDays](docs/Get-WorkingDays.md)
+- [Get-WorkingDates](docs/Get-WorkingDates.md)
 - [Test-WorkingDay](docs/Test-WorkingDay.md)
 
 ## Requirements

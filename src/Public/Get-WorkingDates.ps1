@@ -1,4 +1,4 @@
-function Get-WorkingDays {
+function Get-WorkingDates {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
@@ -31,11 +31,12 @@ function Get-WorkingDays {
 
     $WorkingDays = do {
         if ($NonWorkingDaysOfWeek -notcontains $Date.DayOfWeek -And $NonWorkingDates -notcontains $Date.Date) {
-            $Date
+            $Date.Date
         }
         $Date = $Date.AddDays(1)
         $Days--
     } while ($Days)
 
-    $WorkingDays.Count
+    $WorkingDays
+    
 }

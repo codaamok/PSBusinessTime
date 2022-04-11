@@ -29,12 +29,12 @@ function Get-ElapsedBusinessTime {
     }
 
     $WorkingHours = New-TimeSpan -Start $StartOfDay -End $EndOfDay      
-    $WorkingDays  = Get-WorkingDays -StartDate $StartDate -EndDate $EndDate @CommonParams
+    $WorkingDays  = Get-WorkingDates -StartDate $StartDate -EndDate $EndDate @CommonParams
 
-    if ($WorkingDays -eq 0) {
+    if ($null -eq $WorkingDays) {
         New-TimeSpan
     }
-    elseif ($WorkingDays -eq 1) {
+    elseif ($WorkingDays.Count -eq 1) {
         $Params = @{
             StartDate  = $StartDate
             EndDate    = $EndDate
@@ -45,6 +45,7 @@ function Get-ElapsedBusinessTime {
         GetElapsedTime @Params
     }
     else {
+        $NumberOfWorkingDays = $WorkingDays.Count
         $ElapsedTime = New-TimeSpan
         
         if (Test-WorkingDay -StartDate $StartDate -StartHour $StartOfDay -FinishHour $EndOfDay @CommonParams) {
@@ -62,7 +63,7 @@ function Get-ElapsedBusinessTime {
                 EndOfDay   = $EndOfDay
             }
             $ElapsedTime += (GetElapsedTime @Params)
-            $WorkingDays--
+            $NumberOfWorkingDays--
         }
 
         if (Test-WorkingDay -StartDate $EndDate -StartHour $StartOfDay -FinishHour $EndOfDay @CommonParams) {
@@ -80,10 +81,10 @@ function Get-ElapsedBusinessTime {
                 EndOfDay   = $EndOfDay
             }
             $ElapsedTime += (GetElapsedTime @Params)
-            $WorkingDays--
+            $NumberOfWorkingDays--
         }
 
-        $InBetweenHours = $WorkingDays * $WorkingHours.Hours
+        $InBetweenHours = $NumberOfWorkingDays * $WorkingHours.Hours
         (New-TimeSpan -Hours $InBetweenHours) + $ElapsedTime
     }
 }
