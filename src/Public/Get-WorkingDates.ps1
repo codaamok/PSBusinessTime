@@ -6,7 +6,7 @@ function Get-WorkingDates {
         Return all the working dates between two given datetimes.
         This is helpful to identify the specific dates between two dates which are considered to be "working day(s)".
         What constitutes a "working day" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
-        In other words, the default parameters dictate normal working days are Monday through Friday.
+        In other words, the default parameters dictate normal working days, which are Monday through Friday.
         You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
         This function does not consider the time, only the date, when determining whether it is a working date or not.
     .PARAMETER StartDate
@@ -62,14 +62,13 @@ function Get-WorkingDates {
         [Parameter()]
         [DateTime[]]$NonWorkingDates
     )
- 
-    if ($StartDate.TimeOfDay -eq $EndDate.TimeOfDay) { 
-        # This can return 1 less than intended if we do not do this change. 
-        # For example, if the dates in between are 3 working days,
-        # but the time span between them are 2 whole days,
-        # this returns 2 instead of 3
-        $EndDate = $EndDate.AddSeconds(1) 
-    }
+
+    # This can return 1 less than intended if we do not do this change. 
+    # For example, if the dates in between are 3 working days,
+    # but the time span between them are 2 whole days,
+    # this returns 2 instead of 3
+    $StartDate = $StartDate.Date
+    $EndDate   = $EndDate.Date.AddSeconds(1)
 
     $TimeSpan = New-TimeSpan -Start $StartDate -End $EndDate
     $Days = [Math]::Ceiling($TimeSpan.TotalDays)

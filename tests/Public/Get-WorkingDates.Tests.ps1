@@ -26,13 +26,28 @@ Describe "Get-WorkingDates" {
     It "should be 2 working days across 2 consecutive days" {
         $StartDate = Get-Date '2022-04-07'
         $EndDate   = Get-Date '2022-04-08'
-        Get-WorkingDates -StartDate $StartDate -EndDate $EndDate | Should -Be (0..1 | ForEach-Object { $StartDate.AddDays($_).Date })
+        Get-WorkingDates -StartDate $StartDate -EndDate $EndDate | Should -Be @(
+            Get-Date '2022-04-07'
+            Get-Date '2022-04-08'
+        )
     }
 
     It "should be 2 working days across 3 consecutive days, with traditional weekends" {
         $StartDate = Get-Date '2022-04-07'
         $EndDate   = Get-Date '2022-04-09'
-        Get-WorkingDates -StartDate $StartDate -EndDate $EndDate | Should -Be (0..1 | ForEach-Object { $StartDate.AddDays($_).Date })
+        Get-WorkingDates -StartDate $StartDate -EndDate $EndDate | Should -Be @(
+            Get-Date '2022-04-07'
+            Get-Date '2022-04-08'
+        )
+    }
+
+    It "should be 2 working days across 4 consecutive days, with traditional weekends" {
+        $StartDate = Get-Date '2022-04-08 12:40:12'
+        $EndDate   = Get-Date '2022-04-11 07:37:52'
+        Get-WorkingDates -StartDate $StartDate -EndDate $EndDate | Should -Be @(
+            Get-Date '2022-04-08'
+            Get-Date '2022-04-11'
+        )
     }
 
     It "should be 10 working days across 14 consecutive days, with traditional weekends" {

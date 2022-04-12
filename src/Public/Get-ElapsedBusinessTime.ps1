@@ -5,8 +5,8 @@ function Get-ElapsedBusinessTime {
     .DESCRIPTION
         Get the elapsed time between two dates, where the time measured is only inbetween "business hours".
         This is helpful to measure the amount of time past from a start datetime, to an end datetime, while only considering "business hours".
-        What constitutes a "business hours" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
-        In other words, the default parameters dictate normal working days are Monday through Friday and 08:00 through 17:00.
+        What constitutes "business hours" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
+        In other words, the default parameters dictate normal working days, which are Monday through Friday and 08:00 through 17:00.
         You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
         This function does consider both date and time while calculating the elapsed time.
     .PARAMETER StartDate
@@ -94,8 +94,8 @@ function Get-ElapsedBusinessTime {
         $Params = @{
             StartDate  = $StartDate
             EndDate    = $EndDate
-            StartHour = $StartHour
-            FinishHour   = $FinishHour
+            StartHour  = $StartHour
+            FinishHour = $FinishHour
         }
 
         GetElapsedTime @Params
@@ -115,8 +115,8 @@ function Get-ElapsedBusinessTime {
             $Params = @{
                 StartDate  = $StartDate
                 EndDate    = $FirstDayEndDate
-                StartHour = $StartHour
-                FinishHour   = $FinishHour
+                StartHour  = $StartHour
+                FinishHour = $FinishHour
             }
             $ElapsedTime += (GetElapsedTime @Params)
             $NumberOfWorkingDays--
@@ -133,8 +133,8 @@ function Get-ElapsedBusinessTime {
             $Params = @{
                 StartDate  = $LastDayStartDate
                 EndDate    = $EndDate
-                StartHour = $StartHour
-                FinishHour   = $FinishHour
+                StartHour  = $StartHour
+                FinishHour = $FinishHour
             }
             $ElapsedTime += (GetElapsedTime @Params)
             $NumberOfWorkingDays--
