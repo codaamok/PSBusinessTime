@@ -21,7 +21,7 @@ Get-WorkingDates [-StartDate] <DateTime> [-EndDate] <DateTime> [[-NonWorkingDays
 Return all the working dates between two given datetimes.
 This is helpful to identify the specific dates between two dates which are considered to be "working day(s)".
 What constitutes a "working day" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
-In other words, the default parameters dictate normal working days are Monday through Friday.
+In other words, the default parameters dictate normal working days, which are Monday through Friday.
 You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
 This function does not consider the time, only the date, when determining whether it is a working date or not.
 
