@@ -35,6 +35,12 @@ Describe "Get-ElapsedBusinessTime" {
             $EndDate   = Get-Date '2022-04-08 08:00:00'
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 9
         }
+
+        It "should be 143 minutes, across 2 consecutive days, where 1 is a working days" {
+            $StartDate = Get-Date '2022-04-10 13:52:12'
+            $EndDate   = Get-Date '2022-04-11 10:23:12'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).TotalMinutes | Should -Be 143.2
+        }
     
         It "should be 10 hours, across 1 full day and 1 partial day, where both are working days" {
             $StartDate = Get-Date '2022-04-07 08:00:00'

@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- `Get-ElapsedBusinessTime` did not return correct result where the number of working days between `-StartDate` and `-EndDate` was 1 but the date range spanned more than 1 calendar day, e.g. Sunday through to Monday.
 
 ## [0.1.1] - 2022-04-12
 ### Fixed

@@ -91,6 +91,25 @@ function Get-ElapsedBusinessTime {
         New-TimeSpan
     }
     elseif ($WorkingDays.Count -eq 1) {
+        if (-not (Test-WorkingDay -Date $StartDate -StartHour $StartHour -FinishHour $FinishHour @CommonParams)) {
+            $StartDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
+                                                                $WorkingDays.Month,
+                                                                $WorkingDays.Day,
+                                                                $StartHour.Hour,
+                                                                $StartHour.Minute,
+                                                                $StartHour.Second)
+        }
+
+        if (-not (Test-WorkingDay -Date $EndDate -StartHour $StartHour -FinishHour $FinishHour @CommonParams)) {
+            $EndDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
+                                                              $WorkingDays.Month,
+                                                              $WorkingDays.Day,
+                                                              $FinishHour.Hour,
+                                                              $FinishHour.Minute,
+                                                              $FinishHour.Second)
+
+        }
+
         $Params = @{
             StartDate  = $StartDate
             EndDate    = $EndDate
