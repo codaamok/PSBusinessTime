@@ -22,6 +22,8 @@ function Get-WorkingDates {
         The days of the week, representated as strings e.g. 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday', which denotes non-working days of the week.
         
         Days specified in this parameter will not be considered as working days.
+
+        Default values are Saturday and Sunday.
     .PARAMETER NonWorkingDates
         An array of datetime objects which denote specific non-working dates.
 

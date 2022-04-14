@@ -24,12 +24,14 @@ function Get-ElapsedBusinessTime {
         Note: this parameter is a datetime object is, however only the time is used for calculation. The date is ignored.
     .PARAMETER FinishHour
         The final hour of a typical working day. The default final hour is 17:00.
-        
+                
         Note: this parameter is a datetime object is, however only the time is used for calculation. The date is ignored.
     .PARAMETER NonWorkingDaysOfWeek
         The days of the week, representated as strings e.g. 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday', which denotes non-working days of the week.
         
         Days specified in this parameter will not be considered as working days.
+
+        Default values are Saturday and Sunday.
     .PARAMETER NonWorkingDates
         An array of datetime objects which denote specific non-working dates.
         
