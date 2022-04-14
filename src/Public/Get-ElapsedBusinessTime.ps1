@@ -131,6 +131,7 @@ function Get-ElapsedBusinessTime {
     else {
         $NumberOfWorkingDays = $WorkingDays.Count
         $ElapsedTime = New-TimeSpan
+        $InBetweenHours = New-TimeSpan
         
         $FirstDayEndDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $StartDate.Year,
                                                                   $StartDate.Month,
@@ -174,7 +175,7 @@ function Get-ElapsedBusinessTime {
             $NumberOfWorkingDays--
         }
 
-        $InBetweenHours = $NumberOfWorkingDays * $WorkingHours.Hours
-        (New-TimeSpan -Hours $InBetweenHours) + $ElapsedTime
+        $InBetweenHours = $NumberOfWorkingDays * $WorkingHours
+        $InBetweenHours + $ElapsedTime
     }
 }

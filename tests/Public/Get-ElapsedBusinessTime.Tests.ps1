@@ -169,5 +169,11 @@ Describe "Get-ElapsedBusinessTime" {
             $EndDate   = Get-Date '2022-04-11 03:00:00'
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 0
         }
+
+        It "should be 2016.41666666667, across 4 consecutive days, where 3 are working days" {
+            $StartDate = Get-Date '24 March 2022 07:23:33'
+            $EndDate   = Get-Date '28 March 2022 01:04:35'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate -StartHour (Get-Date '07:00:00') -FinishHour (Get-Date '23:59:59')).TotalMinutes | Should -Be '2016.41666666667'
+        }
     }
 }
