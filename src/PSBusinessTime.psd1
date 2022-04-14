@@ -12,7 +12,7 @@
 RootModule = 'PSBusinessTime.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.4'
+ModuleVersion = '0.1.5'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -108,8 +108,7 @@ PrivateData = @{
 
         # ReleaseNotes of this module
         ReleaseNotes = '# Fixed
-- Get-ElapsedBusinessTime did not return correct result when either the start date or end date were outside of business hours
-- Added line breaks in between each line for all comment based help'
+- Get-ElapsedBusinessTime did not return correct result if range between -StartHour and -FinishHour was not whole, ie was a span of time where minutes and seconds also needed consideration'
 
         # Prerelease string of this module
         # Prerelease = ''
