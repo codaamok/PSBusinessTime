@@ -12,7 +12,7 @@
 RootModule = 'PSBusinessTime.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.1.7'
+ModuleVersion = '0.2.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,9 +107,8 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '# Changed
-- Test-WorkingDay now has parameter validation to ensure -StartHour is less then -FinishHour
-- Get-ElapsedBusinessTime now has parameter validation to ensure -StartHour is less then -FinishHour'
+        ReleaseNotes = '# Added
+- New function Add-WorkingDays'
 
         # Prerelease string of this module
         # Prerelease = ''

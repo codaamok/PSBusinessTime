@@ -115,6 +115,8 @@ The days of the week, representated as strings e.g.
 
 Days specified in this parameter will not be considered as working days.
 
+Default values are Saturday and Sunday.
+
 ```yaml
 Type: String[]
 Parameter Sets: (All)
