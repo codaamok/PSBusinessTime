@@ -4,10 +4,15 @@ function Get-WorkingDates {
         Return all the working dates between two given datetimes.
     .DESCRIPTION
         Return all the working dates between two given datetimes.
+
         This is helpful to identify the specific dates between two dates which are considered to be "working day(s)".
+
         What constitutes a "working day" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
+
         In other words, the default parameters dictate normal working days, which are Monday through Friday.
+
         You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
+
         This function does not consider the time, only the date, when determining whether it is a working date or not.
     .PARAMETER StartDate
         The datetime object to identify all the working dates from. It must be an older datetime than -EndDate.
@@ -15,9 +20,11 @@ function Get-WorkingDates {
         The datetime object to identify all the working dates to. It must be a newer datetime than -StartDate.
     .PARAMETER NonWorkingDaysOfWeek
         The days of the week, representated as strings e.g. 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday', which denotes non-working days of the week.
+        
         Days specified in this parameter will not be considered as working days.
     .PARAMETER NonWorkingDates
         An array of datetime objects which denote specific non-working dates.
+
         Dates specified in this parameter will not be considered as working days.
     .EXAMPLE
         Get-WorkingDates -StartDate (Get-Date '2022-04-11') -EndDate (Get-Date '2022-04-11')

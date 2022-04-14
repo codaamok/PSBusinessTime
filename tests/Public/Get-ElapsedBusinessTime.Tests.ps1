@@ -30,9 +30,27 @@ Describe "Get-ElapsedBusinessTime" {
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 9
         }
 
+        It "should be 1 hour, across 2 consecutive days, where both are working days" {
+            $StartDate = Get-Date '2022-04-07 16:00:00'
+            $EndDate   = Get-Date '2022-04-08 03:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 1
+        }
+
+        It "should be 1 hour, across 2 consecutive days, where both are working days" {
+            $StartDate = Get-Date '2022-04-07 22:00:00'
+            $EndDate   = Get-Date '2022-04-08 09:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 1
+        }
+
         It "should be 9 hours, across 2 consecutive days, where both are working days" {
             $StartDate = Get-Date '2022-04-07 08:00:00'
             $EndDate   = Get-Date '2022-04-08 08:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 9
+        }
+
+        It "should be 9 hours, across 3 consecutive days, where all are working days" {
+            $StartDate = Get-Date '2022-04-06 22:00:00'
+            $EndDate   = Get-Date '2022-04-08 02:00:00'
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 9
         }
 
@@ -138,6 +156,18 @@ Describe "Get-ElapsedBusinessTime" {
             $EndDate   = Get-Date '2022-12-31 23:59:59'
             $NonWorkingDaysOfWeek = 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate -NonWorkingDaysOfWeek $NonWorkingDaysOfWeek).TotalHours | Should -Be 0
+        }
+
+        It "should be 0 hours, across 2 consecutive days, where 2 are working days" {
+            $StartDate = Get-Date '2022-04-07 18:00:00'
+            $EndDate   = Get-Date '2022-04-08 03:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 0
+        }
+
+        It "should be 0 hours, across 4 consecutive days, where 2 are working days" {
+            $StartDate = Get-Date '2022-04-08 18:00:00'
+            $EndDate   = Get-Date '2022-04-11 03:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 0
         }
     }
 }

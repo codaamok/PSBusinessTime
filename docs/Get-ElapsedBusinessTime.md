@@ -20,10 +20,15 @@ Get-ElapsedBusinessTime [-StartDate] <DateTime> [-EndDate] <DateTime> [[-StartHo
 
 ## DESCRIPTION
 Get the elapsed time between two dates, where the time measured is only inbetween "business hours".
+
 This is helpful to measure the amount of time past from a start datetime, to an end datetime, while only considering "business hours".
+
 What constitutes "business hours" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
+
 In other words, the default parameters dictate normal working days, which are Monday through Friday and 08:00 through 17:00.
+
 You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
+
 This function does consider both date and time while calculating the elapsed time.
 
 ## EXAMPLES
@@ -116,6 +121,7 @@ Accept wildcard characters: False
 ### -StartHour
 The starting hour of a typical working day.
 The default starting hour is 08:00 (AM).
+
 Note: this parameter is a datetime object is, however only the time is used for calculation.
 The date is ignored.
 
@@ -134,6 +140,7 @@ Accept wildcard characters: False
 ### -FinishHour
 The final hour of a typical working day.
 The default final hour is 17:00.
+
 Note: this parameter is a datetime object is, however only the time is used for calculation.
 The date is ignored.
 
@@ -152,6 +159,7 @@ Accept wildcard characters: False
 ### -NonWorkingDaysOfWeek
 The days of the week, representated as strings e.g.
 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday', which denotes non-working days of the week.
+
 Days specified in this parameter will not be considered as working days.
 
 ```yaml
@@ -168,6 +176,7 @@ Accept wildcard characters: False
 
 ### -NonWorkingDates
 An array of datetime objects which denote specific non-working dates.
+
 Dates specified in this parameter will not be considered as working days.
 
 ```yaml

@@ -4,23 +4,31 @@ function Test-WorkingDay {
         Determine whether a given datetime is a working day.
     .DESCRIPTION
         Determine whether a given datetime is a working day.
+        
         What constitutes a "working day" in terms of day of the week, or calendar date, including working hours, is arbitrary and completely customisable.
+        
         In other words, the default parameters dictate normal working days, which are Monday through Friday, and normal working hours are 08:00 through 17:00.
+        
         You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
+        
         If the datetime of -Date falls outside of these parameters, you'll receive a boolean result.
     .PARAMETER Date
         The datetime to determine whether it is a working day or not.
     .PARAMETER StartHour
         The starting hour of a typical working day. The default starting hour is 08:00 (AM).
+        
         Note: this parameter is a datetime object is, however only the time is used for calculation. The date is ignored.
     .PARAMETER FinishHour
         The final hour of a typical working day. The default final hour is 17:00.
+        
         Note: this parameter is a datetime object is, however only the time is used for calculation. The date is ignored.
     .PARAMETER NonWorkingDaysOfWeek
         The days of the week, representated as strings e.g. 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday', which denotes non-working days of the week.
+        
         Days specified in this parameter will not be considered as working days.
     .PARAMETER NonWorkingDates
         An array of datetime objects which denote specific non-working dates.
+        
         Dates specified in this parameter will not be considered as working days.
     .EXAMPLE
         Test-WorkingDay -Date (Get-Date '2022-04-11 09:00:00')

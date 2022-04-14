@@ -2,7 +2,7 @@ $PesterConfig = New-PesterConfiguration -Hashtable @{
     Run = @{
         Path = '{0}/Public' -f $PSScriptRoot
         Throw = $true
-        SkipRemainingOnFailure = 'Block'
+        #SkipRemainingOnFailure = 'Block'
     }
     Output = @{
         Verbosity = 'Detailed'
