@@ -93,7 +93,7 @@ function Get-ElapsedBusinessTime {
         NonWorkingDates      = $NonWorkingDates
     }
 
-    $WorkingHours = New-TimeSpan -Start $StartHour -End $FinishHour      
+    $WorkingHours = New-TimeSpan -Start $StartHour -End $FinishHour
     $WorkingDays  = Get-WorkingDates -StartDate $StartDate -EndDate $EndDate @CommonParams
 
     if ($null -eq $WorkingDays) {
@@ -107,6 +107,7 @@ function Get-ElapsedBusinessTime {
                                                                 $StartHour.Hour,
                                                                 $StartHour.Minute,
                                                                 $StartHour.Second)
+            $j++
         }
 
         if (-not (Test-WorkingDay -Date $EndDate -StartHour $StartHour -FinishHour $FinishHour @CommonParams)) {
@@ -116,17 +117,23 @@ function Get-ElapsedBusinessTime {
                                                               $FinishHour.Hour,
                                                               $FinishHour.Minute,
                                                               $FinishHour.Second)
-
+            $j++
         }
 
-        $Params = @{
-            StartDate  = $StartDate
-            EndDate    = $EndDate
-            StartHour  = $StartHour
-            FinishHour = $FinishHour
+        if ($j -eq 2) {
+            # This is if both start and end datetimes are outside of working hours
+            New-TimeSpan
         }
-
-        GetElapsedTime @Params
+        else {
+            $Params = @{
+                StartDate  = $StartDate
+                EndDate    = $EndDate
+                StartHour  = $StartHour
+                FinishHour = $FinishHour
+            }
+    
+            GetElapsedTime @Params
+        }
     }
     else {
         $NumberOfWorkingDays = $WorkingDays.Count

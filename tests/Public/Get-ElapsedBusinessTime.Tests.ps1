@@ -164,6 +164,12 @@ Describe "Get-ElapsedBusinessTime" {
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 0
         }
 
+        It "should be 0 hours, across 1 consecutive day, where 1 is a working day" {
+            $StartDate = Get-Date '2022-04-07 01:00:00'
+            $EndDate   = Get-Date '2022-04-07 03:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 0
+        }
+
         It "should be 0 hours, across 4 consecutive days, where 2 are working days" {
             $StartDate = Get-Date '2022-04-08 18:00:00'
             $EndDate   = Get-Date '2022-04-11 03:00:00'
