@@ -78,6 +78,9 @@ function Get-ElapsedBusinessTime {
         [DateTime]$StartHour = '08:00:00',
 
         [Parameter()]
+        [ValidateScript({
+            if ($StartHour -gt $_) { throw "-StartHour must be less than -FinishHour." } else { return $true }
+        })]
         [DateTime]$FinishHour = '17:00:00',
 
         [Parameter()]
