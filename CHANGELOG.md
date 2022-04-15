@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [0.2.1] - 2022-04-15
 ### Fixed
 - `Get-ElapsedBusinessTime` did not return correct result if `-StartDate` and `-EndDate` were on the same day, but it was a working day, and its time for both dates were outside of working hours
 
@@ -43,7 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Initial release
 
-[Unreleased]: https://github.com/codaamok/PSBusinessTime/compare/0.2.0..HEAD
+[Unreleased]: https://github.com/codaamok/PSBusinessTime/compare/0.2.1..HEAD
+[0.2.1]: https://github.com/codaamok/PSBusinessTime/compare/0.2.0..0.2.1
 [0.2.0]: https://github.com/codaamok/PSBusinessTime/compare/0.1.7..0.2.0
 [0.1.7]: https://github.com/codaamok/PSBusinessTime/compare/0.1.6..0.1.7
 [0.1.6]: https://github.com/codaamok/PSBusinessTime/compare/0.1.5..0.1.6
