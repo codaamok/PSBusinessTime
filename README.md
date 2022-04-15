@@ -10,6 +10,7 @@ Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-
 
 ## Functions
 
+- [Add-WorkingDays](docs/Add-WorkingDays.md)
 - [Get-ElapsedBusinessTime](docs/Get-ElapsedBusinessTime.md)
 - [Get-WorkingDates](docs/Get-WorkingDates.md)
 - [Test-WorkingDay](docs/Test-WorkingDay.md)
