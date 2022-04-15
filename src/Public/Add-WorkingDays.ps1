@@ -1,5 +1,4 @@
 function Add-WorkingDays {
-    [CmdletBinding()]
     <#
     .SYNOPSIS
         Add a number of working days onto a given date.
@@ -53,6 +52,7 @@ function Add-WorkingDays {
         Chris Dent (@indented-automation) wrote this in the WinAdmins Discord
         https://discord.com/channels/618712310185197588/618857671608500234/913855890384371712
     #>
+    [CmdletBinding()]
     param (
         [Parameter()]
         [object]$Date = (Get-Date),
