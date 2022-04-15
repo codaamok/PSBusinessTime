@@ -12,7 +12,7 @@
 RootModule = 'PSBusinessTime.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.2.1'
+ModuleVersion = '0.2.2'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -108,7 +108,7 @@ PrivateData = @{
 
         # ReleaseNotes of this module
         ReleaseNotes = '# Fixed
-- Get-ElapsedBusinessTime did not return correct result if -StartDate and -EndDate were on the same day, but it was a working day, and its time for both dates were outside of working hours'
+- CmdletBinding attribute was in incorrect position for Add-WorkingDays. This caused PlatyPS to not generate docs properly. This fix does not provide any functional improvement to Add-WorkingDays. At this time, it is just necessary to push to source control which invokes the release pipeline.'
 
         # Prerelease string of this module
         # Prerelease = ''
