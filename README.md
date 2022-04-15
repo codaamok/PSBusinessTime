@@ -39,7 +39,7 @@ Get-Command -Module PSBusinessTime
 Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
 ```
 
-The function will return a timespan object of 162 hours:
+The function will return a timespan object of 171 hours:
 
 ```powershell
 Days              : 7
@@ -55,7 +55,7 @@ TotalSeconds      : 615600
 TotalMilliseconds : 615600000
 ```
 
-2022-04-01 through 2022-04-30 is an entire calendar month, and only 162 hours is considered "working hours" within the defined parameters. '2022-04-15' and '2022-04-18' are considered non-working dates.
+2022-04-01 through 2022-04-30 is an entire calendar month, and only 171 hours is considered "working hours" within the defined parameters. '2022-04-15' and '2022-04-18' are considered non-working dates.
 
 ___
 
