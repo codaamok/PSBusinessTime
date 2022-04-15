@@ -30,6 +30,12 @@ Describe "Get-ElapsedBusinessTime" {
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 9
         }
 
+        It "should be 9 hours on the same day" {
+            $StartDate = Get-Date '2022-04-07 07:00:00'
+            $EndDate   = Get-Date '2022-04-07 18:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 9
+        }
+
         It "should be 1 hour, across 2 consecutive days, where both are working days" {
             $StartDate = Get-Date '2022-04-07 16:00:00'
             $EndDate   = Get-Date '2022-04-08 03:00:00'
@@ -167,6 +173,12 @@ Describe "Get-ElapsedBusinessTime" {
         It "should be 0 hours, across 1 consecutive day, where 1 is a working day" {
             $StartDate = Get-Date '2022-04-07 01:00:00'
             $EndDate   = Get-Date '2022-04-07 03:00:00'
+            (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 0
+        }
+
+        It "should be 0 hours, across 1 consecutive day, where 1 is a working day" {
+            $StartDate = Get-Date '2022-04-07 18:00:00'
+            $EndDate   = Get-Date '2022-04-07 19:00:00'
             (Get-ElapsedBusinessTime -StartDate $StartDate -EndDate $EndDate).Hours | Should -Be 0
         }
 

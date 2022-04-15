@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Fixed
+- `Get-ElapsedBusinessTime` did not return correct result if `-StartDate` and `-EndDate` were on the same day, but it was a working day, and its time for both dates were outside of working hours
 
 ## [0.2.0] - 2022-04-14
 ### Added

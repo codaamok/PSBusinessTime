@@ -105,39 +105,46 @@ function Get-ElapsedBusinessTime {
         New-TimeSpan
     }
     elseif ($WorkingDays.Count -eq 1) {
-        if (-not (Test-WorkingDay -Date $StartDate -StartHour $StartHour -FinishHour $FinishHour @CommonParams)) {
-            $StartDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
+        $Params = @{
+            StartHour = $StartHour
+            FinishHour = $FinishHour
+        }
+
+        $_StartDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
                                                                 $WorkingDays.Month,
                                                                 $WorkingDays.Day,
                                                                 $StartHour.Hour,
                                                                 $StartHour.Minute,
                                                                 $StartHour.Second)
-            $j++
+
+        if ($StartDate -le $_StartDate) {
+            $Params["StartDate"] = $_StartDate
+        }
+        else {
+            $Params["StartDate"] = $StartDate
         }
 
-        if (-not (Test-WorkingDay -Date $EndDate -StartHour $StartHour -FinishHour $FinishHour @CommonParams)) {
-            $EndDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
+        $_EndDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
                                                               $WorkingDays.Month,
                                                               $WorkingDays.Day,
                                                               $FinishHour.Hour,
                                                               $FinishHour.Minute,
                                                               $FinishHour.Second)
-            $j++
+
+        if ($EndDate -gt $_EndDate) {
+            $Params["EndDate"] = $_EndDate
+        }
+        else {
+            $Params["EndDate"] = $EndDate
         }
 
-        if ($j -eq 2) {
-            # This is if both start and end datetimes are outside of working hours
+        $Result = GetElapsedTime @Params
+
+        if ($Result.Ticks -le 0) {
             New-TimeSpan
         }
         else {
-            $Params = @{
-                StartDate  = $StartDate
-                EndDate    = $EndDate
-                StartHour  = $StartHour
-                FinishHour = $FinishHour
-            }
-    
-            GetElapsedTime @Params
+            $Result
         }
     }
     else {
