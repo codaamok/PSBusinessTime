@@ -1,4 +1,4 @@
-function Get-ElapsedBusinessTime {
+function New-BusinessTimeSpan {
     <#
     .SYNOPSIS
         Get the elapsed time between two dates, where the time measured is only inbetween "business hours".
@@ -14,10 +14,10 @@ function Get-ElapsedBusinessTime {
         You can also specify particular dates, or days of the week, to be regarded as non-working dates via the -NonWorkingDates and -NonWorkingDaysOfWeek parameters.
 
         This function does consider both date and time while calculating the elapsed time.
-    .PARAMETER StartDate
-        The datetime object to start calculating the elapsed time from. It must be an older datetime than -EndDate.
-    .PARAMETER EndDate
-        The datetime object to end calculating the elapsed time to. It must be a newer datetime than -StartDate.
+    .PARAMETER Start
+        The datetime object to start calculating the elapsed time from. It must be an older datetime than -End.
+    .PARAMETER End
+        The datetime object to end calculating the elapsed time to. It must be a newer datetime than -Start.
     .PARAMETER StartHour
         The starting hour of a typical working day. The default starting hour is 08:00 (AM).
         
@@ -37,27 +37,27 @@ function Get-ElapsedBusinessTime {
         
         Dates specified in this parameter will not be considered as working days.
     .EXAMPLE
-        Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-11 10:00:00') -EndDate (Get-Date '2022-04-11 10:37:00')
+        New-BusinessTimeSpan -Start (Get-Date '2022-04-11 10:00:00') -End (Get-Date '2022-04-11 10:37:00')
         
         The function will return a timespan object of 37 minutes. 2022-04-11 is a Monday and the whole time inbetween the date range given is within the default parameters.
     .EXAMPLE
-        Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-11 08:00:00') -EndDate (Get-Date '2022-04-12 08:00:00')
+        New-BusinessTimeSpan -Start (Get-Date '2022-04-11 08:00:00') -End (Get-Date '2022-04-12 08:00:00')
         
         The function will return a timespan object of 9 hours. 2022-04-11 is a Monday and 2022-04-12 is a Tuesday, and only 9 hours is considered "working hours" within the default parameters. 
     .EXAMPLE
-        Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-11 13:00:00') -EndDate (Get-Date '2022-04-13 13:00:00')
+        New-BusinessTimeSpan -Start (Get-Date '2022-04-11 13:00:00') -End (Get-Date '2022-04-13 13:00:00')
         
         The function will return a timespan object of 18 hours. 2022-04-11 through 2022-04-13 is Monday through Wednesday, and only 18 hours is considered "working hours" within the default parameters. 
     .EXAMPLE
-        Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
+        New-BusinessTimeSpan -Start (Get-Date '2022-04-01 00:00:00') -End (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
         
         The function will return a timespan object of 162 hours. 2022-04-01 through 2022-04-30 is an entire calendar month, and only 162 hours is considered "working hours" within the defined parameters. '2022-04-15' and '2022-04-18' are considered non-working dates.
     .EXAMPLE
-        Get-ElapsedBusinessTime -StartDate (Get-Date '2022-01-01 00:00:00') -EndDate (Get-Date '2022-12-31 23:59:59') -NonWorkingDates (Get-Date '2022-01-03'), (Get-Date '2022-04-15'), (Get-Date '2022-04-18'), (Get-Date '2022-05-02'), (Get-Date '2022-06-02'), (Get-Date '2022-06-03'), (Get-Date '2022-08-29'), (Get-Date '2022-12-26'), (Get-Date '2022-12-27')
+        New-BusinessTimeSpan -Start (Get-Date '2022-01-01 00:00:00') -End (Get-Date '2022-12-31 23:59:59') -NonWorkingDates (Get-Date '2022-01-03'), (Get-Date '2022-04-15'), (Get-Date '2022-04-18'), (Get-Date '2022-05-02'), (Get-Date '2022-06-02'), (Get-Date '2022-06-03'), (Get-Date '2022-08-29'), (Get-Date '2022-12-26'), (Get-Date '2022-12-27')
         
         The function will return a timespan object of 2259 hours. 2022-01-01 through 2022-12-31 is an entire year, and only 2259 hours is considered "working hours" within the defined parameters. All dates passed to -NonWorkingDates are considered non-working dates (public holidays in the UK for 2022).
     .EXAMPLE
-        Get-ElapsedBusinessTime -StartDate (Get-Date '2022-01-01 00:00:00') -EndDate (Get-Date '2022-12-31 23:59:59') -NonWorkingDaysOfWeek 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
+        New-BusinessTimeSpan -Start (Get-Date '2022-01-01 00:00:00') -End (Get-Date '2022-12-31 23:59:59') -NonWorkingDaysOfWeek 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
         
         The function will return a timespan object of 0 hours. 2022-01-01 through 2022-12-31 is an entire year, and 0 hours is considered "working hours" within the defined parameters. All days passed to -NonWorkingDaysOfWeek are considered non-working days, hence the result of 0 hours.
     .INPUTS
@@ -68,13 +68,13 @@ function Get-ElapsedBusinessTime {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory)]
-        [datetime]$StartDate,
+        [datetime]$Start,
         
         [Parameter(Mandatory)]
         [ValidateScript({
-            if ($StartDate -gt $_) { throw "-StartDate must be less than -EndDate." } else { return $true }
+            if ($Start -gt $_) { throw "-Start must be less than -End." } else { return $true }
         })]
-        [datetime]$EndDate,
+        [datetime]$End,
 
         [Parameter()]
         [DateTime]$StartHour = '08:00:00',
@@ -99,7 +99,7 @@ function Get-ElapsedBusinessTime {
     }
 
     $WorkingHours = New-TimeSpan -Start $StartHour -End $FinishHour
-    $WorkingDays  = Get-WorkingDates -StartDate $StartDate -EndDate $EndDate @CommonParams
+    $WorkingDays  = Get-WorkingDates -StartDate $Start -EndDate $End @CommonParams
 
     if ($null -eq $WorkingDays) {
         New-TimeSpan
@@ -110,32 +110,32 @@ function Get-ElapsedBusinessTime {
             FinishHour = $FinishHour
         }
 
-        $_StartDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
-                                                                $WorkingDays.Month,
-                                                                $WorkingDays.Day,
-                                                                $StartHour.Hour,
-                                                                $StartHour.Minute,
-                                                                $StartHour.Second)
+        $_Start = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
+                                                         $WorkingDays.Month,
+                                                         $WorkingDays.Day,
+                                                         $StartHour.Hour,
+                                                         $StartHour.Minute,
+                                                         $StartHour.Second)
 
-        if ($StartDate -le $_StartDate) {
-            $Params["StartDate"] = $_StartDate
+        if ($Start -le $_Start) {
+            $Params["StartDate"] = $_Start
         }
         else {
-            $Params["StartDate"] = $StartDate
+            $Params["StartDate"] = $Start
         }
 
-        $_EndDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
-                                                              $WorkingDays.Month,
-                                                              $WorkingDays.Day,
-                                                              $FinishHour.Hour,
-                                                              $FinishHour.Minute,
-                                                              $FinishHour.Second)
+        $_End = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $WorkingDays.Year,
+                                                           $WorkingDays.Month,
+                                                           $WorkingDays.Day,
+                                                           $FinishHour.Hour,
+                                                           $FinishHour.Minute,
+                                                           $FinishHour.Second)
 
-        if ($EndDate -gt $_EndDate) {
-            $Params["EndDate"] = $_EndDate
+        if ($End -gt $_End) {
+            $Params["EndDate"] = $_End
         }
         else {
-            $Params["EndDate"] = $EndDate
+            $Params["EndDate"] = $End
         }
 
         $Result = GetElapsedTime @Params
@@ -152,45 +152,45 @@ function Get-ElapsedBusinessTime {
         $ElapsedTime = New-TimeSpan
         $InBetweenHours = New-TimeSpan
         
-        $FirstDayEndDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $StartDate.Year,
-                                                                  $StartDate.Month,
-                                                                  $StartDate.Day,
+        $FirstDayEnd = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $Start.Year,
+                                                                  $Start.Month,
+                                                                  $Start.Day,
                                                                   $FinishHour.Hour, 
                                                                   $FinishHour.Minute, 
                                                                   $FinishHour.Second)
 
-        if (Test-WorkingDay -Date $StartDate -StartHour $StartHour -FinishHour $FinishHour @CommonParams) {        
+        if (Test-WorkingDay -Date $Start -StartHour $StartHour -FinishHour $FinishHour @CommonParams) {        
             $Params = @{
-                StartDate  = $StartDate
-                EndDate    = $FirstDayEndDate
+                StartDate  = $Start
+                EndDate    = $FirstDayEnd
                 StartHour  = $StartHour
                 FinishHour = $FinishHour
             }
             $ElapsedTime += (GetElapsedTime @Params)
             $NumberOfWorkingDays--
         }
-        elseif ($StartDate -gt $FirstDayEndDate) {
+        elseif ($Start -gt $FirstDayEnd) {
             $NumberOfWorkingDays--
         }
 
-        $LastDayStartDate = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $EndDate.Year,
-                                                                       $EndDate.Month,
-                                                                       $EndDate.Day,
-                                                                       $StartHour.Hour, 
-                                                                       $StartHour.Minute, 
-                                                                       $StartHour.Second)
+        $LastDayStart = Get-Date ('{0}/{1}/{2} {3}:{4}:{5}' -f $End.Year,
+                                                               $End.Month,
+                                                               $End.Day,
+                                                               $StartHour.Hour, 
+                                                               $StartHour.Minute, 
+                                                               $StartHour.Second)
 
-        if (Test-WorkingDay -Date $EndDate -StartHour $StartHour -FinishHour $FinishHour @CommonParams) {
+        if (Test-WorkingDay -Date $End -StartHour $StartHour -FinishHour $FinishHour @CommonParams) {
             $Params = @{
-                StartDate  = $LastDayStartDate
-                EndDate    = $EndDate
+                StartDate  = $LastDayStart
+                EndDate    = $End
                 StartHour  = $StartHour
                 FinishHour = $FinishHour
             }
             $ElapsedTime += (GetElapsedTime @Params)
             $NumberOfWorkingDays--
         }
-        elseif ($EndDate -lt $LastDayStartDate) {
+        elseif ($End -lt $LastDayStart) {
             $NumberOfWorkingDays--
         }
 

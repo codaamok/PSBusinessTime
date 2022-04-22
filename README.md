@@ -11,7 +11,7 @@ Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-
 ## Functions
 
 - [Add-WorkingDays](docs/Add-WorkingDays.md)
-- [Get-ElapsedBusinessTime](docs/Get-ElapsedBusinessTime.md)
+- [New-BusinessTimeSpan](docs/New-BusinessTimeSpan.md)
 - [Get-WorkingDates](docs/Get-WorkingDates.md)
 - [Test-WorkingDay](docs/Test-WorkingDay.md)
 
@@ -37,7 +37,7 @@ Get-Command -Module PSBusinessTime
 ## Examples
 
 ```powershell
-Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
+New-BusinessTimeSpan -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
 ```
 
 The function will return a timespan object of 171 hours:

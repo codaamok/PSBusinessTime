@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-ElapsedBusinessTime
+# New-BusinessTimeSpan
 
 ## SYNOPSIS
 Get the elapsed time between two dates, where the time measured is only inbetween "business hours".
@@ -13,9 +13,8 @@ Get the elapsed time between two dates, where the time measured is only inbetwee
 ## SYNTAX
 
 ```
-Get-ElapsedBusinessTime [-StartDate] <DateTime> [-EndDate] <DateTime> [[-StartHour] <DateTime>]
- [[-FinishHour] <DateTime>] [[-NonWorkingDaysOfWeek] <String[]>] [[-NonWorkingDates] <DateTime[]>]
- [<CommonParameters>]
+New-BusinessTimeSpan [-Start] <DateTime> [-End] <DateTime> [[-StartHour] <DateTime>] [[-FinishHour] <DateTime>]
+ [[-NonWorkingDaysOfWeek] <String[]>] [[-NonWorkingDates] <DateTime[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,7 +34,7 @@ This function does consider both date and time while calculating the elapsed tim
 
 ### EXAMPLE 1
 ```
-Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-11 10:00:00') -EndDate (Get-Date '2022-04-11 10:37:00')
+New-BusinessTimeSpan -Start (Get-Date '2022-04-11 10:00:00') -End (Get-Date '2022-04-11 10:37:00')
 ```
 
 The function will return a timespan object of 37 minutes.
@@ -43,7 +42,7 @@ The function will return a timespan object of 37 minutes.
 
 ### EXAMPLE 2
 ```
-Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-11 08:00:00') -EndDate (Get-Date '2022-04-12 08:00:00')
+New-BusinessTimeSpan -Start (Get-Date '2022-04-11 08:00:00') -End (Get-Date '2022-04-12 08:00:00')
 ```
 
 The function will return a timespan object of 9 hours.
@@ -51,7 +50,7 @@ The function will return a timespan object of 9 hours.
 
 ### EXAMPLE 3
 ```
-Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-11 13:00:00') -EndDate (Get-Date '2022-04-13 13:00:00')
+New-BusinessTimeSpan -Start (Get-Date '2022-04-11 13:00:00') -End (Get-Date '2022-04-13 13:00:00')
 ```
 
 The function will return a timespan object of 18 hours.
@@ -59,7 +58,7 @@ The function will return a timespan object of 18 hours.
 
 ### EXAMPLE 4
 ```
-Get-ElapsedBusinessTime -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
+New-BusinessTimeSpan -Start (Get-Date '2022-04-01 00:00:00') -End (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
 ```
 
 The function will return a timespan object of 162 hours.
@@ -68,7 +67,7 @@ The function will return a timespan object of 162 hours.
 
 ### EXAMPLE 5
 ```
-Get-ElapsedBusinessTime -StartDate (Get-Date '2022-01-01 00:00:00') -EndDate (Get-Date '2022-12-31 23:59:59') -NonWorkingDates (Get-Date '2022-01-03'), (Get-Date '2022-04-15'), (Get-Date '2022-04-18'), (Get-Date '2022-05-02'), (Get-Date '2022-06-02'), (Get-Date '2022-06-03'), (Get-Date '2022-08-29'), (Get-Date '2022-12-26'), (Get-Date '2022-12-27')
+New-BusinessTimeSpan -Start (Get-Date '2022-01-01 00:00:00') -End (Get-Date '2022-12-31 23:59:59') -NonWorkingDates (Get-Date '2022-01-03'), (Get-Date '2022-04-15'), (Get-Date '2022-04-18'), (Get-Date '2022-05-02'), (Get-Date '2022-06-02'), (Get-Date '2022-06-03'), (Get-Date '2022-08-29'), (Get-Date '2022-12-26'), (Get-Date '2022-12-27')
 ```
 
 The function will return a timespan object of 2259 hours.
@@ -77,7 +76,7 @@ All dates passed to -NonWorkingDates are considered non-working dates (public ho
 
 ### EXAMPLE 6
 ```
-Get-ElapsedBusinessTime -StartDate (Get-Date '2022-01-01 00:00:00') -EndDate (Get-Date '2022-12-31 23:59:59') -NonWorkingDaysOfWeek 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
+New-BusinessTimeSpan -Start (Get-Date '2022-01-01 00:00:00') -End (Get-Date '2022-12-31 23:59:59') -NonWorkingDaysOfWeek 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'
 ```
 
 The function will return a timespan object of 0 hours.
@@ -86,9 +85,9 @@ All days passed to -NonWorkingDaysOfWeek are considered non-working days, hence 
 
 ## PARAMETERS
 
-### -StartDate
+### -Start
 The datetime object to start calculating the elapsed time from.
-It must be an older datetime than -EndDate.
+It must be an older datetime than -End.
 
 ```yaml
 Type: DateTime
@@ -102,9 +101,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -EndDate
+### -End
 The datetime object to end calculating the elapsed time to.
-It must be a newer datetime than -StartDate.
+It must be a newer datetime than -Start.
 
 ```yaml
 Type: DateTime
