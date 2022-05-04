@@ -30,7 +30,7 @@ CompanyName = ''
 Copyright = '(c) Adam Cook (@codaamok). All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'A PowerShell module with functions to help working with and calculating business hours / date times.'
+Description = 'A PowerShell module with functions to help calculate working hours, and for generally working with or calculating business hours / date times.'
 
 # Minimum version of the PowerShell engine required by this module
 PowerShellVersion = '5.1'
@@ -95,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        # Tags = @()
+        Tags = @("Time","DateTime","Dates","Date","WorkingTime","WorkingHours","WorkingDays","BusinessTime","BusinessHours","BusinessDays")
 
         # A URL to the license for this module.
         # LicenseUri = ''
