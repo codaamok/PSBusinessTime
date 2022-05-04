@@ -4,7 +4,7 @@
 |-|-|-|-|-|-|
 | `main` | [![GitHub Workflow Status (main)](https://img.shields.io/github/workflow/status/codaamok/PSBusinessTime/Pipeline/main)](https://github.com/codaamok/PSBusinessTime/actions) | [![GitHub last commit (branch)](https://img.shields.io/github/last-commit/codaamok/PSBusinessTime/main?color=blue)](https://github.com/codaamok/PSBusinessTime/commits/main) | [![GitHub release (latest by date)](https://img.shields.io/github/v/release/codaamok/PSBusinessTime?color=blue)](https://github.com/codaamok/PSBusinessTime/releases/latest) [![GitHub Release Date](https://img.shields.io/github/release-date/codaamok/PSBusinessTime?color=blue)](https://github.com/codaamok/PSBusinessTime/releases/latest) | [![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/PSBusinessTime?color=blue)](https://www.powershellgallery.com/packages/PSBusinessTime) | [![GitHub all releases](https://img.shields.io/github/downloads/codaamok/PSBusinessTime/total?color=blue)](https://github.com/codaamok/PSBusinessTime/releases) |
 
-A PowerShell module with functions to help working with and calculating business hours / date times.
+A PowerShell module with functions to help calculate working hours, and for generally working with or calculating business hours / date times.
 
 Inspired by https://pleasework.robbievance.net/howto-calculate-elapsed-business-hours-using-powershell/.
 
