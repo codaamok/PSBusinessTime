@@ -37,7 +37,7 @@ Get-Command -Module PSBusinessTime
 ## Examples
 
 ```powershell
-New-BusinessTimeSpan -StartDate (Get-Date '2022-04-01 00:00:00') -EndDate (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
+New-BusinessTimeSpan -Start (Get-Date '2022-04-01 00:00:00') -End (Get-Date '2022-04-30 23:59:59') -NonWorkingDates (Get-Date '2022-04-15'), (Get-Date '2022-04-18')
 ```
 
 The function will return a timespan object of 171 hours:
@@ -69,7 +69,7 @@ The function will return `true` because the datetime is within the default param
 ___
 
 ```powershell
-Get-WorkingDates -StartDate (Get-Date '2022-04-04') -EndDate (Get-Date '2022-04-17') -NonWorkingDaysOfWeek 'Saturday','Sunday','Monday'
+Get-WorkingDates -Start (Get-Date '2022-04-04') -End (Get-Date '2022-04-17') -NonWorkingDaysOfWeek 'Saturday','Sunday','Monday'
 ```
 
 The function will return an array of 8 datetime objects for '2022-04-05' through to '2022-04-08', and '2022-04-12' through to '2022-04-15':
