@@ -194,7 +194,7 @@ function New-BusinessTimeSpan {
             $NumberOfWorkingDays--
         }
 
-        $InBetweenHours = $NumberOfWorkingDays * $WorkingHours
+        $InBetweenHours = New-TimeSpan -Seconds ($NumberOfWorkingDays * $WorkingHours.TotalSeconds)
         $InBetweenHours + $ElapsedTime
     }
 }

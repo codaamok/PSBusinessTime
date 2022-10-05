@@ -63,7 +63,7 @@ Describe "New-BusinessTimeSpan" {
         It "should be 143 minutes, across 2 consecutive days, where 1 is a working days" {
             $StartDate = Get-Date '2022-04-10 13:52:12'
             $EndDate   = Get-Date '2022-04-11 10:23:12'
-            (New-BusinessTimeSpan -Start $StartDate -End $EndDate).TotalMinutes | Should -Be 143.2
+            [decimal](New-BusinessTimeSpan -Start $StartDate -End $EndDate).TotalMinutes | Should -Be 143.2
         }
     
         It "should be 10 hours, across 1 full day and 1 partial day, where both are working days" {
